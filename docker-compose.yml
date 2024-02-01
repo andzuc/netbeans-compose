@@ -1,0 +1,19 @@
+services:
+  vscodium:
+    image: "${MVN_IMAGE:-ghcr.io/andzuc/netbeans}"
+    container_name: netbeans
+    environment:
+      - DISPLAY
+      - XAUTH0
+    volumes:
+      - /tmp/.X11-unix/X0:/tmp/.X11-unix/X0
+      - maven_config:/home/netbeans/.m2
+      - netbeans_config:/home/netbeans/.netbeans
+      - "${DEV}:/home/netbeans/dev"
+volumes:
+  netbeans_config:
+    external: true
+    name: "${NETBEANS_CONFIG}"
+  maven_config:
+    external: true
+    name: "${MAVEN_CONFIG}"
